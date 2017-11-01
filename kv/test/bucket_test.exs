@@ -7,11 +7,14 @@ defmodule KV.BucketTest do
     %{bucket: bucket}
   end
 
-  test "stores values by key", %{bucket: bucket} do
+  test "stores values & deletes by key", %{bucket: bucket} do
      # `bucket` is now the bucket from the setup block
     assert KV.Bucket.get(bucket, "milk") == nil
 
     KV.Bucket.put(bucket, "milk", 3)
     assert KV.Bucket.get(bucket, "milk") == 3
+
+    KV.Bucket.delete(bucket, "milk")
+    assert KV.Bucket.get(bucket, "milk") == nil
   end
 end
